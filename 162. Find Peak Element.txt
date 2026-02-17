@@ -1,0 +1,43 @@
+162. Find Peak Element
+
+LOGIC::
+
+In this problem, we need to find a peak element. A peak element is an element that is greater than its neighboring elements.
+
+Instead of checking every element one by one, we use Binary Search to make it faster.
+
+We take two pointers: start and end.
+
+Then we find the middle element.
+
+We compare the middle element with its next element.
+
+If the middle element is greater than the next element, it means we are on a decreasing slope. So the peak must be on the left side, including the middle element.
+
+If the middle element is smaller than the next element, it means we are on an increasing slope. So the peak must be on the right side.
+
+We keep repeating this process until start and end become equal.
+
+At that point, that index is a peak element.
+
+CODE::
+
+public class Solution {
+    
+    public int findPeakElement(int[] nums) {
+        int start = 0;
+        int end = nums.length - 1;
+        
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+            
+            if (nums[mid] > nums[mid + 1]) {
+                end = mid;          // peak is on left side (including mid)
+            } else {
+                start = mid + 1;    // peak is on right side
+            }
+        }
+        
+        return start;   // or return end (both are same)
+    }
+}

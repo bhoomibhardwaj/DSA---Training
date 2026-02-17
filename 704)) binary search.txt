@@ -1,0 +1,49 @@
+704)) binary search
+
+LOGIC::
+
+Since the array is sorted,
+
+we don’t need to check every element one by one.
+
+We can:
+
+• Take two pointers → start and end
+• Find the middle element
+
+Now compare middle element with target:
+
+• If middle equals target → return its index
+• If target is smaller than middle → search left half
+• If target is greater than middle → search right half
+
+We keep repeating this process
+until start becomes greater than end.
+
+If we don’t find the target → return -1.
+
+code::
+
+public class Solution {
+    
+    public int search(int[] nums, int target) {
+        int start = 0;
+        int end = nums.length - 1;
+        
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+            
+            if (nums[mid] == target) {
+                return mid;          // target found
+            } 
+            else if (target < nums[mid]) {
+                end = mid - 1;       // search left half
+            } 
+            else {
+                start = mid + 1;     // search right half
+            }
+        }
+        
+        return -1;   // target not found
+    }
+}
